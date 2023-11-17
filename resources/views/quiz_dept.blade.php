@@ -5,7 +5,7 @@ $page = 'dashboard';
 
 @section('content')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
-      
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
     <style type="text/css">
         .redcol {
@@ -112,7 +112,7 @@ $page = 'dashboard';
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 @-webkit-keyframes fadein {
-  from {top: 0; opacity: 0;} 
+  from {top: 0; opacity: 0;}
   to {top: 30px; opacity: 1;}
 }
 
@@ -122,7 +122,7 @@ $page = 'dashboard';
 }
 
 @-webkit-keyframes fadeout {
-  from {top: 30px; opacity: 1;} 
+  from {top: 30px; opacity: 1;}
   to {top: 0; opacity: 0;}
 }
 
@@ -206,7 +206,7 @@ $page = 'dashboard';
                             </div>
                         </div>
                     </form>
-                     @if (Auth::user()->role == 'admin' || Auth::user()->role == 'subadmin')       
+                     @if (Auth::user()->role == 'admin' || Auth::user()->role == 'subadmin')
                     <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target=".login_popup"
                         data-whatever="">Create Quiz</button>
                             @endif
@@ -259,14 +259,14 @@ $page = 'dashboard';
                                             <tr>
                                                 <td class='sn'>{{ ++$i }}</td>
                                                 <td> {{ $row->title }}<br>
-						@php 
+						@php
                         $quiz_section_id = \App\Models\QuizSection::where('asset_master_id',$row->id)->pluck('quiz_main_id');
 							foreach($quiz_section_id as $quiz){
                            $category_id = \App\Models\quiz_main::whereIn('id',$quiz_section_id)->pluck('category_id');
 
         					$category_name = \App\Models\Category::whereIn('id',$category_id)->pluck('category_name');
-                            }  
-							
+                            }
+
  						foreach($category_name as $key => $cat_name){
                         if ($key === array_key_first($category_name->all()) && $key === array_key_last($category_name->all())) {
                                echo  '<span style="color:red">['.$cat_name.']</span>';
@@ -276,20 +276,20 @@ $page = 'dashboard';
                                    echo  '<span style="color:red">['.$cat_name.',</span>';
                                   continue;
                             }
- 
+
                           if ($key === array_key_last($category_name->all())) {
                              echo  '<span style="color:red">'.$cat_name.']</span>';
                               }
                         else{
                      	 echo  '<span style="color:red">'.$cat_name.',</span>';
                         }
-                            
+
                         }
                         @endphp
-                       
+
 						</td>
-                            
-                         
+
+
                                                 <td> {{ $row->total_questions }}</td>
                                                 <td>
                                                     <button value="{{ $row->id }}"
@@ -410,7 +410,7 @@ $page = 'dashboard';
              //    x.className = "show";
              // setTimeout(function(){ x.className = x.className.replace("show", ""); }, 8000);
              //        }
-}  
+}
         $(document).ready(function() {
             $('.qlink').on('click',function() {
                 var id = $(this).val();
@@ -423,7 +423,7 @@ $page = 'dashboard';
                     $('.url').append("<h4>"+quicklink+"</h4>");
                 }
             })
-          
+
             //CLICK EVENTS WHEN COPYING LINK
             $('.copy').on('click', function() {
                 $(".url").css("background-color", "#007bff");
@@ -438,12 +438,12 @@ $page = 'dashboard';
                 $('.copy').text('COPY');
                 $('.verror').remove();
             });
-        
+
           $('.grplink').on('click', function() {
                 var grplink = $(this).val();
                 $('.groupbtn').val(grplink);
             });
-        
+
             $('.groupbtn').on('click', function(e) {
                 e.preventDefault();
                 const group_email = $('.groupemail').val();
@@ -454,7 +454,7 @@ $page = 'dashboard';
                     url: "{{ route('groupmail') }}",
                     data: {
                         group_email,groupbtn
-                        
+
                     },
                     beforeSend: function(data){
                         $('.verror').remove();
